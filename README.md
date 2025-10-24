@@ -1,7 +1,6 @@
 # Bank IDs — IBAN Workshop (Python 3.13)
 
 Tiny, clean codebase for a 30-minute Copilot **.prompt.md** workshop.  
-Focus: simple **IBAN** utilities only. No I/O, no external deps.
 
 ## What’s inside
 - `src/bankids/iban_core.py` → has docstrings & a few unit tests (as examples).
@@ -14,14 +13,31 @@ Focus: simple **IBAN** utilities only. No I/O, no external deps.
 
 ## Quick start (from zero)
 
-> These steps assume you just installed VS Code and don’t have Python yet.
+> These steps assume you just installed VS Code.
 
 1) **Install VS Code & set up GitHub Copilot**
    - Open VS Code.
    - Look for the Copilot icon in the Status Bar → **Set up Copilot**.
    - Sign in with GitHub and finish the setup wizard.
 
-2) **Create a virtual environment & install deps**
+
+2) **Choose your track & write the prompt**
+   - **Unit tests track:** Inspect `tests/` (and `iban_core.py`) to infer the conventions used to write the tests.  
+     Edit `.github/prompts/unit-tests.prompt.md` to include and capture those rules so that newly AI generated tests will follow the same conventions.
+   - **Docstrings track:** Inspect docstrings in `src/bankids/iban_core.py` to infer the conventions used to write the docstrings. 
+     Edit `.github/prompts/docstrings.prompt.md` to include and capture those rules so that newly AI generated docstrings will follow the same conventions.
+
+3) **Run your prompt on a target file**
+   - Target modules: `src/bankids/iban_parse.py` or `src/bankids/iban_build.py`.
+   - Open Chat: **View → Chat** (macOS **⌃⌘I**, Win/Linux **Ctrl+Alt+I**).
+   - In Chat type `/`, pick **docstrings** or **unit-tests**, then type what you want to change and send.
+   - Review and accept the patch.
+
+---
+
+That's it—have fun!
+
+**(Optional) Create a virtual environment & install deps**
    ```bash
    # macOS/Linux
    python -m venv .venv
@@ -36,26 +52,4 @@ Focus: simple **IBAN** utilities only. No I/O, no external deps.
    pip install -e .[test]
    ```
 
-5) **Open the folder in VS Code**
-   - VS Code → **File → Open Folder…** → pick the project folder.
 
-6) **Enable & use prompt files (.prompt.md)**
-   - Ensure the folder `.github/prompts/` exists (it’s already in this repo).
-   - Create one or more prompt files in that folder (e.g., `docstrings.prompt.md`, `tests.prompt.md`).  
-     Paste the prompt content provided by your workshop lead.
-   - Open the **Chat** sidebar in VS Code.
-   - To run a prompt file:
-     - In the Chat input, type `/` and pick your prompt by name, then follow the prompt; or
-     - Use Command Palette: **Chat: Run Prompt** and select your prompt file.
-
----
-
-## Try it (2 minutes)
-1. Open `src/bankids/iban_parse.py`, select all, run your **docstrings** prompt, and accept the patch.
-2. Run your **tests** prompt for the same module and commit the new test file.
-3. (Optional) Run tests:
-   ```bash
-   pytest -q
-   ```
-
-That's it—have fun!
