@@ -20,7 +20,6 @@ Tiny, clean codebase for a 30-minute Copilot **.prompt.md** workshop.
    - Look for the Copilot icon in the Status Bar → **Set up Copilot**.
    - Sign in with GitHub and finish the setup wizard.
 
-
 2) **Choose your track & write the prompt**
    - **Unit tests track:** Inspect `tests/` (and `iban_core.py`) to infer the conventions used to write the tests.  
      Edit `.github/prompts/unit-tests.prompt.md` to include and capture those rules so that newly AI generated tests will follow the same conventions.
