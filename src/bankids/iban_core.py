@@ -4,53 +4,62 @@ from string import ascii_uppercase
 
 
 def normalize_iban(iban: str) -> str:
-    """Return an uppercase, alphanumeric-only IBAN (spaces and separators removed).
+    """Normalize an IBAN to uppercase alphanumeric by removing spaces and separators.
 
-    The function does not validate the IBAN; it merely normalizes its form.
+    This does not validate the IBAN; it only standardizes its presentation.
+
+    Args:
+        iban: IBAN-like string to normalize.
+
+    Returns:
+        Uppercase alphanumeric IBAN with all separators removed.
 
     Examples:
         >>> normalize_iban("  nl91 abna 0417 1643 00 ")
         'NL91ABNA0417164300'
 
-    Returns:
-        Normalized IBAN string.
+    - by data talents
     """
     cleaned = "".join(ch for ch in iban if ch.isalnum())
     return cleaned.upper()
 
 
 def format_iban(iban: str, group: int = 4) -> str:
-    """Format an IBAN with a space every `group` characters.
+    """Format an IBAN by inserting a space every ``group`` characters.
+
+    Args:
+        iban: IBAN-like string (normalized or not).
+        group: Group size for spacing (default 4).
+
+    Returns:
+        Human-friendly string with groups separated by spaces.
 
     Examples:
         >>> format_iban("NL91ABNA0417164300", group=4)
         'NL91 ABNA 0417 1643 00'
 
-    Args:
-        iban: Any IBAN-like string (normalized or not).
-        group: Group size for spacing.
-
-    Returns:
-        A human-friendly string with groups separated by spaces.
+    - by data talents
     """
     norm = normalize_iban(iban)
     return " ".join(norm[i : i + group] for i in range(0, len(norm), group))
 
 
 def iban_to_numeric(iban: str) -> str:
-    """Convert letters to digits per IBAN spec (A=10, ..., Z=35), digits unchanged.
+    """Convert letters to digits per IBAN rules (A=10 … Z=35); digits remain unchanged.
 
     This helper is typically used after moving the first four characters to the end.
+
+    Args:
+        iban: IBAN-like string; case-insensitive. Non-alphanumerics are removed by normalization.
+
+    Returns:
+        String of digits representing the IBAN letters and digits.
 
     Examples:
         >>> iban_to_numeric("AB12")
         '101112'
 
-    Args:
-        iban: Upper/lowercase allowed; non-alnum is ignored by normalization first.
-
-    Returns:
-        A string of digits representing the IBAN letters and digits.
+    - by data talents
     """
     norm = normalize_iban(iban)
     out = []
@@ -64,17 +73,19 @@ def iban_to_numeric(iban: str) -> str:
 
 
 def _mod97(numeric: str) -> int:
-    """Compute numeric % 97 using a streaming approach to avoid big integers.
-
-    Examples:
-        >>> _mod97("3214282912345698765432161182")  # doctest: +ELLIPSIS
-        1
+    """Compute ``numeric % 97`` using a streaming approach to avoid big integers.
 
     Args:
         numeric: String with digits only.
 
     Returns:
-        The remainder after division by 97.
+        Remainder after division by 97.
+
+    Examples:
+        >>> _mod97("3214282912345698765432161182")
+        1
+
+    - by data talents
     """
     remainder = 0
     for ch in numeric:
@@ -83,12 +94,18 @@ def _mod97(numeric: str) -> int:
 
 
 def is_valid_iban(iban: str) -> bool:
-    """Return True if the IBAN is valid by basic checks and the MOD-97 rule.
+    """Check IBAN validity via basic checks and the MOD-97 rule.
 
     Basic checks:
-    - length between 15 and 34 (inclusive)
-    - alphanumeric only (after normalization)
+    - Length between 15 and 34 (inclusive)
+    - Alphanumeric only (after normalization)
     - MOD-97 result equals 1 after rearrangement
+
+    Args:
+        iban: IBAN string in any common presentation.
+
+    Returns:
+        True if valid; False otherwise.
 
     Examples:
         >>> is_valid_iban("NL91 ABNA 0417 1643 00")
@@ -96,11 +113,7 @@ def is_valid_iban(iban: str) -> bool:
         >>> is_valid_iban("NL00ABNA0417164300")
         False
 
-    Args:
-        iban: IBAN string in any common presentation.
-
-    Returns:
-        True if valid; False otherwise.
+    - by data talents
     """
     norm = normalize_iban(iban)
     if not (15 <= len(norm) <= 34) or not norm.isalnum():
