@@ -1,4 +1,4 @@
-# Bank IDs — IBAN Workshop (Python 3.13)
+# Bank IDs — IBAN Workshop (Python 3.10)
 
 Tiny, clean codebase for a 30-minute Copilot **.prompt.md** workshop.  
 
@@ -36,19 +36,26 @@ Tiny, clean codebase for a 30-minute Copilot **.prompt.md** workshop.
 
 That's it—have fun!
 
-**(Optional) Create a virtual environment & install deps**
+**(Optional) Run the demo & tests**
    ```bash
    # macOS/Linux
-   python -m venv .venv
+   python3 run_example.py # Run Demo
+   
+   python -m venv .venv # Run Tests
    source .venv/bin/activate
-   python -m pip install -U pip
-   pip install -e .[test]
+   python -m pip install pytest
+   PYTHONPATH=src pytest tests/
 
-   # Windows (PowerShell)
-   python -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   python -m pip install -U pip
-   pip install -e .[test]
+   # Windows
+   python.exe run_example.py # Run Demo
+
+   python -m venv .venv # Run Tests
+   .\.venv\Scripts\activate
+   python -m pip install pytest
+   # (cmd)
+   set PYTHONPATH=src
+   pytest tests/
+   # (powershell)
+   $env:PYTHONPATH = "src"
+   pytest tests/
    ```
-
-
