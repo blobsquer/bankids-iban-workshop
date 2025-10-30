@@ -8,7 +8,7 @@ from pathlib import Path
 
 # Add src/ to Python path so imports work without installation
 src_path = Path(__file__).parent / "src"
-sys.path.append(str(src_path))
+sys.path.insert(0, str(src_path))
 
 from bankids.iban_core import normalize_iban, format_iban, is_valid_iban
 from bankids.iban_parse import parse_iban, mask_iban

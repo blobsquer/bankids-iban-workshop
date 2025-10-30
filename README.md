@@ -6,7 +6,6 @@ Tiny, clean codebase for a 30-minute Copilot **.prompt.md** workshop.
 - `src/bankids/iban_core.py` → has docstrings & a few unit tests (as examples).
 - `src/bankids/iban_build.py` → no docstrings & no tests (you add them).
 - `src/bankids/iban_parse.py` → no docstrings & no tests (you add them).
-- `src/bankids/types.py` → tiny dataclasses.
 - Empty prompt directory: `.github/prompts/` (you'll add prompt files here).
 
 ---

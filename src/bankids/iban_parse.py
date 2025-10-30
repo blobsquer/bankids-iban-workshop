@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, Union
+from typing import Dict
 
 from .iban_core import normalize_iban, is_valid_iban
 
@@ -10,8 +10,8 @@ from .iban_core import normalize_iban, is_valid_iban
 class IbanParts:
     country: str
     checksum: str
-    bank_code: Union[str, None]
-    account: Union[str, None]
+    bank_code: str | None
+    account: str | None
 
 
 def parse_iban(iban: str) -> IbanParts:
