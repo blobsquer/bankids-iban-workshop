@@ -58,3 +58,8 @@ That's it—have fun!
    $env:PYTHONPATH = "src"
    pytest tests/
    ```
+
+# Visual Studio Code Copilot Prompt Files
+
+For information on how to create and customize Copilot prompt files in Visual Studio Code, check out the official documentation:
+[VS Code Copilot Prompt Files Documentation](https://code.visualstudio.com/docs/copilot/customization/prompt-files)
